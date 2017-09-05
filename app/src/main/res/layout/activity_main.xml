@@ -24,11 +24,19 @@
         android:layout_height="wrap_content"
         android:hint="Short Description"
         android:id="@+id/descriptionET"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
         android:onClick="saveData"/>
+
+    <Button
+        android:id="@+id/delete"
+        android:onClick="deleteData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

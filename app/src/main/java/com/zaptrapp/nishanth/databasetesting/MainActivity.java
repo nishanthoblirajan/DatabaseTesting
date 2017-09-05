@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveData(View view) {
         String name = nameET.getText().toString();
-        long amount = Long.parseLong(amountET.getText().toString());
+        double amount = Double.parseDouble(amountET.getText().toString());
         String description = descriptionET.getText().toString();
         Data data = new Data(name,amount,description);
         DbHelperProviderClient.addDetails(
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 data.getDescription(),
                 this);
         adapter.notifyDataSetChanged();
+        Log.d("Data",data.toString());
     }
 
+    public void deleteData(View view) {
+        DbHelperProviderClient.removeAllDetails(this);
+        adapter.notifyDataSetChanged();
+    }
 }

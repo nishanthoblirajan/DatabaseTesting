@@ -48,13 +48,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Viewho
         if (cursor != null) {
             if (cursor.moveToPosition(position)) {
                 name = cursor.getString(cursor.getColumnIndex(DbHelperProvider.DETAILS_NAME_COLUMN));
-                amount = cursor.getLong(cursor.getColumnIndex(DbHelperProvider.DETAILS_AMOUNT_COLUMN));
+                amount = cursor.getDouble(cursor.getColumnIndex(DbHelperProvider.DETAILS_AMOUNT_COLUMN));
                 desc = cursor.getString(cursor.getColumnIndex(DbHelperProvider.DETAILS_SHORTDESC_COLUMN));
                 holder.name_rv.setText(name);
-                holder.amount_rv.setText(String.valueOf(amount));
+                holder.amount_rv.setText(amount+"");
                 holder.description_rv.setText(desc);
-
-            } else {
             }
             cursor.close();
         } else {

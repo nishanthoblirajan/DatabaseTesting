@@ -45,4 +45,9 @@ public class Data {
         this.amount = amount;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return name+" Rs: "+amount+" Reason: "+description;
+    }
 }
