@@ -44,28 +44,21 @@ public class MainActivity extends AppCompatActivity {
         // use this if you want the RecyclerView to look like a vertical list view
         recycler_view.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+        adapter = new RecyclerAdapter(this);
 
-        ArrayList<Data> mArrayList = new ArrayList<Data>();
-        Cursor mCursor = DbHelperProviderClient.getAllDetails(getApplicationContext());
-        for (mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor.moveToNext()) {
-            String name = mCursor.getString(mCursor.getColumnIndex(DbHelperProvider.DETAILS_NAME_COLUMN));
-            long amount = mCursor.getLong(mCursor.getColumnIndex(DbHelperProvider.DETAILS_AMOUNT_COLUMN));
-            String description = mCursor.getString(mCursor.getColumnIndex(DbHelperProvider.DETAILS_SHORTDESC_COLUMN));
-            // The Cursor is now set to the right position
-            mArrayList.add(new Data(name, amount, description));
-        }
-
-        adapter = new RecyclerAdapter(mArrayList, this);
         recycler_view.setAdapter(adapter);
     }
-
 
     public void saveData(View view) {
         String name = nameET.getText().toString();
         long amount = Long.parseLong(amountET.getText().toString());
         String description = descriptionET.getText().toString();
         Data data = new Data(name,amount,description);
-        DbHelperProviderClient.addDetails(data, this);
+        DbHelperProviderClient.addDetails(
+                data.getName(),
+                 data.getAmount(),
+                data.getDescription(),
+                this);
         adapter.notifyDataSetChanged();
     }
 

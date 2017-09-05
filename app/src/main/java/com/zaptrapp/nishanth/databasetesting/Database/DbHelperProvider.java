@@ -61,7 +61,7 @@ public class DbHelperProvider extends ContentProvider {
     private static final String DATABASE_DETAILS_CREATE = "create table " + DETAILS_TABLE + " (" +
                                 "_id integer primary key autoincrement, " +
                                 DETAILS_NAME_COLUMN + " text, " +
-                                DETAILS_AMOUNT_COLUMN + " integer, " +
+                                DETAILS_AMOUNT_COLUMN + " real, " +
                                 DETAILS_SHORTDESC_COLUMN + " text" +
                                 ")";
     
@@ -108,7 +108,7 @@ public class DbHelperProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
         String[] selectionArgs, String sortOrder) {
 
-        // Open thedatabase.
+        // Open the database.
         SQLiteDatabase db;
         try {
             db = myOpenHelper.getWritableDatabase();

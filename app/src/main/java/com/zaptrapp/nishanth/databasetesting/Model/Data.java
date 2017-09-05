@@ -1,12 +1,14 @@
 package com.zaptrapp.nishanth.databasetesting.Model;
 
+import android.database.Cursor;
+
 /**
  * Created by Nishanth on 05-Sep-17.
  */
 
 public class Data {
     String name;
-    long amount;
+    double amount;
     String description;
 
     public String getName() {
@@ -17,11 +19,11 @@ public class Data {
         this.name = name;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -34,9 +36,11 @@ public class Data {
     }
 
     public Data() {
+
     }
 
-    public Data(String name, long amount, String description) {
+    public Data(String name, double amount, String description) {
+
         this.name = name;
         this.amount = amount;
         this.description = description;

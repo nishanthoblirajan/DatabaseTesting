@@ -11,20 +11,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.zaptrapp.nishanth.databasetesting.Model.Data;
-
 import java.util.Date;
 
 public class DbHelperProviderClient{
 
 
     // ------------- DETAILS_HELPERS ------------
-    public static Uri addDetails (Data data,
+    public static Uri addDetails (String Name, 
+                                double Amount, 
+                                String ShortDesc, 
                                 Context c) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DbHelperProvider.DETAILS_NAME_COLUMN, data.getName());
-        contentValues.put(DbHelperProvider.DETAILS_AMOUNT_COLUMN, data.getAmount());
-        contentValues.put(DbHelperProvider.DETAILS_SHORTDESC_COLUMN, data.getDescription());
+        contentValues.put(DbHelperProvider.DETAILS_NAME_COLUMN, Name);
+        contentValues.put(DbHelperProvider.DETAILS_AMOUNT_COLUMN, Amount);
+        contentValues.put(DbHelperProvider.DETAILS_SHORTDESC_COLUMN, ShortDesc);
         ContentResolver cr = c.getContentResolver();
         return cr.insert(DbHelperProvider.DETAILS_URI, contentValues);
     }
@@ -72,12 +72,14 @@ public class DbHelperProviderClient{
     }
 
     public static int updateDetails (int rowId, 
-                                   Data data,
+                                   String Name,
+                                   double Amount,
+                                   String ShortDesc,
                                    Context c) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DbHelperProvider.DETAILS_NAME_COLUMN, data.getName());
-        contentValues.put(DbHelperProvider.DETAILS_AMOUNT_COLUMN, data.getAmount());
-        contentValues.put(DbHelperProvider.DETAILS_SHORTDESC_COLUMN, data.getDescription());
+        contentValues.put(DbHelperProvider.DETAILS_NAME_COLUMN, Name);
+        contentValues.put(DbHelperProvider.DETAILS_AMOUNT_COLUMN, Amount);
+        contentValues.put(DbHelperProvider.DETAILS_SHORTDESC_COLUMN, ShortDesc);
         Uri rowAddress = ContentUris.withAppendedId(DbHelperProvider.DETAILS_URI, rowId);
 
         ContentResolver cr = c.getContentResolver();
