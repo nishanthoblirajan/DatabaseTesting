@@ -1,5 +1,6 @@
 package com.zaptrapp.nishanth.databasetesting;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,5 +68,12 @@ public class MainActivity extends AppCompatActivity {
     public void deleteData(View view) {
         DbHelperProviderClient.removeAllDetails(this);
         adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    protected void onResume() {
+        adapter.notifyDataSetChanged();
+        super.onResume();
     }
 }
