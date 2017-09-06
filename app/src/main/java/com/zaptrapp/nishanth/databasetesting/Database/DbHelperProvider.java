@@ -41,9 +41,10 @@ public class DbHelperProvider extends ContentProvider {
     public static final int ALL_DETAILS = 0;
     public static final int SINGLE_DETAILS = 1;
 
-    
+
 
     public static final String ROW_ID = "_id";
+    public static final int ROW_ID_COLUMN_POSITION = 0;
 
     private static final UriMatcher uriMatcher;
 

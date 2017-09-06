@@ -1,7 +1,9 @@
 package com.zaptrapp.nishanth.databasetesting.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.zaptrapp.nishanth.databasetesting.Database.DbHelperProvider;
 import com.zaptrapp.nishanth.databasetesting.Database.DbHelperProviderClient;
+import com.zaptrapp.nishanth.databasetesting.EditActivity;
 import com.zaptrapp.nishanth.databasetesting.Model.Data;
 import com.zaptrapp.nishanth.databasetesting.R;
 
@@ -56,19 +59,36 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Viewho
                 holder.name_rv.setText(name);
                 holder.amount_rv.setText(amount+"");
                 holder.description_rv.setText(desc);
-//                holder.delete_bt.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        DbHelperProviderClient.removeDetails(cursor.get(DbHelperProvider.ROW_ID),context);
-//                        notifyItemRemoved(h.getAdapterPosition());
-//                    }
-//                });
+
+
+                final int finalId1 = id;
+                final String finalName = name;
+                final double finalAmount = amount;
+                final String finalDesc = desc;
+                holder.edit_bt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Cursor editCursor = DbHelperProviderClient.getDetails(finalId1, context);
+                        if (editCursor.moveToPosition(0)) {
+
+                            Intent intent = new Intent(context, EditActivity.class);
+                            Bundle intent_bundle = new Bundle();
+                            intent_bundle.putString("name", finalName);
+                            intent_bundle.putDouble("amount", finalAmount);
+                            intent_bundle.putString("description", finalDesc);
+                            intent_bundle.putInt("id", finalId1);
+                            intent.putExtras(intent_bundle);
+                            context.startActivity(intent);
+                        }
+                    }
+                });
             }
             cursor.close();
         } else {
 
         }
         final int finalId = id;
+        Log.d("ID",id+" ");
         holder.delete_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +96,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Viewho
                 notifyItemRemoved(h.getAdapterPosition());
             }
         });
+
+        Log.d("TDDA",id+" "+finalId+" "+position);
+
 
     }
 

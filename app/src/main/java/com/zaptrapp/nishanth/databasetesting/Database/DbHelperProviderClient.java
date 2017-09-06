@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -76,6 +77,9 @@ public class DbHelperProviderClient{
                                    double Amount,
                                    String ShortDesc,
                                    Context c) {
+
+        Log.d("updateDetails",rowId+" "+Name+" "+Amount+" "+ShortDesc);
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(DbHelperProvider.DETAILS_NAME_COLUMN, Name);
         contentValues.put(DbHelperProvider.DETAILS_AMOUNT_COLUMN, Amount);
