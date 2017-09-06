@@ -40,4 +40,22 @@
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/name_rv"
         android:layout_alignStart="@+id/name_rv" />
+
+    <Button
+        android:id="@+id/edit_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/description_rv"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/description_rv"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/delete_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/amount_rv"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/amount_rv"
+        android:text="Delete" />
 </RelativeLayout>

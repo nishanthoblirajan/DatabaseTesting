@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                  data.getAmount(),
                 data.getDescription(),
                 this);
-        adapter.notifyDataSetChanged();
+        adapter.notifyItemInserted(DbHelperProviderClient.getAllDetails(this).getCount());
         Log.d("Data",data.toString());
     }
 
