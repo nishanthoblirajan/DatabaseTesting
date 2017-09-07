@@ -50,42 +50,51 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Viewho
         String desc = "";
         int id=-1;
         final Cursor cursor = DbHelperProviderClient.getAllDetails(context);
-        if (cursor != null) {
-            if (cursor.moveToPosition(position)) {
-                name = cursor.getString(cursor.getColumnIndex(DbHelperProvider.DETAILS_NAME_COLUMN));
-                amount = cursor.getDouble(cursor.getColumnIndex(DbHelperProvider.DETAILS_AMOUNT_COLUMN));
-                desc = cursor.getString(cursor.getColumnIndex(DbHelperProvider.DETAILS_SHORTDESC_COLUMN));
-                id = cursor.getInt(cursor.getColumnIndex(DbHelperProvider.ROW_ID));
-                holder.name_rv.setText(name);
-                holder.amount_rv.setText(amount+"");
-                holder.description_rv.setText(desc);
+        try {
+            if (cursor != null) {
+                if (cursor.moveToPosition(position)) {
+                    name = cursor.getString(cursor.getColumnIndex(DbHelperProvider.DETAILS_NAME_COLUMN));
+                    amount = cursor.getDouble(cursor.getColumnIndex(DbHelperProvider.DETAILS_AMOUNT_COLUMN));
+                    desc = cursor.getString(cursor.getColumnIndex(DbHelperProvider.DETAILS_SHORTDESC_COLUMN));
+                    id = cursor.getInt(cursor.getColumnIndex(DbHelperProvider.ROW_ID));
+                    holder.name_rv.setText(name);
+                    holder.amount_rv.setText(amount+"");
+                    holder.description_rv.setText(desc);
 
 
-                final int finalId1 = id;
-                final String finalName = name;
-                final double finalAmount = amount;
-                final String finalDesc = desc;
-                holder.edit_bt.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Cursor editCursor = DbHelperProviderClient.getDetails(finalId1, context);
-                        if (editCursor.moveToPosition(0)) {
+                    final int finalId1 = id;
+                    final String finalName = name;
+                    final double finalAmount = amount;
+                    final String finalDesc = desc;
+                    holder.edit_bt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Cursor editCursor = DbHelperProviderClient.getDetails(finalId1, context);
+                            try {
+                                if (editCursor.moveToPosition(0)) {
 
-                            Intent intent = new Intent(context, EditActivity.class);
-                            Bundle intent_bundle = new Bundle();
-                            intent_bundle.putString("name", finalName);
-                            intent_bundle.putDouble("amount", finalAmount);
-                            intent_bundle.putString("description", finalDesc);
-                            intent_bundle.putInt("id", finalId1);
-                            intent.putExtras(intent_bundle);
-                            context.startActivity(intent);
+                                    Intent intent = new Intent(context, EditActivity.class);
+                                    Bundle intent_bundle = new Bundle();
+                                    intent_bundle.putString("name", finalName);
+                                    intent_bundle.putDouble("amount", finalAmount);
+                                    intent_bundle.putString("description", finalDesc);
+                                    intent_bundle.putInt("id", finalId1);
+                                    intent.putExtras(intent_bundle);
+                                    context.startActivity(intent);
+                                }
+                            } finally {
+                                editCursor.close();
+                            }
                         }
-                    }
-                });
-            }
-            cursor.close();
-        } else {
+                    });
 
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
         }
         final int finalId = id;
         Log.d("ID",id+" ");

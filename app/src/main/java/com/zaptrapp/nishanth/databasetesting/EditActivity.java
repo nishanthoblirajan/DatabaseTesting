@@ -56,6 +56,10 @@ public class EditActivity extends AppCompatActivity {
                 mName_edit.getText().toString(),
                 Double.parseDouble(mAmount_edit.getText().toString()),
                 mDescription_edit.getText().toString(),this);
+
+        if(id == 34){
+            UpdateNumberService.startActionUpdateWidget(this);
+        }
         finish();
 
     }

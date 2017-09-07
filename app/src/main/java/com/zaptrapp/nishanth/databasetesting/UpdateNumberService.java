@@ -42,13 +42,26 @@ public class UpdateNumberService extends IntentService {
             }else if(ACTION_GET.equals(action)){
                 handleActionGet();
             }
+            startActionUpdateWidget(this);
         }
     }
 
     private void handleActionGet() {
         Cursor cursor = DbHelperProviderClient.getDetails(34,this);
         //TODO 1 Get the correct amount
-        double amount = cursor.getDouble(DbHelperProvider.DETAILS_AMOUNT_COLUMN_POSITION);
+                double amount = 0;
+        try {
+            if(cursor!=null) {
+                if (cursor.moveToFirst()) {
+
+                    amount = cursor.getDouble(DbHelperProvider.DETAILS_AMOUNT_COLUMN_POSITION);
+                    //no need to look up column index since you already know it due to the projection used
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, NewAppWidget.class));
         //Now update all widgets

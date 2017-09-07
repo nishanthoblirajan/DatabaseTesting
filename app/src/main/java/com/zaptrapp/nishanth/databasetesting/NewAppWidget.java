@@ -18,7 +18,7 @@ public class NewAppWidget extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
 
-        views.setTextViewText(R.id.appwidget_text,String.valueOf(amount));
+        views.setTextViewText(R.id.appwidget_amount,String.valueOf(amount));
         Intent intent = new Intent(context, UpdateNumberService.class);
         intent.setAction(UpdateNumberService.ACTION_UPDATE);
         PendingIntent wateringPendingIntent = PendingIntent.getService(
