@@ -21,7 +21,21 @@
             android:name=".Database.DbHelperProvider"
             android:authorities="com.zaptrapp.nishanth.databasetesting.provider" />
 
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
+
+        <receiver android:name=".NewAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".UpdateNumberService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
