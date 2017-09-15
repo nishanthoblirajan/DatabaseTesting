@@ -1,6 +1,3 @@
-/**********************************************************************************************************************************************************************
-****** AUTO GENERATED FILE BY ANDROID SQLITE HELPER SCRIPT BY FEDERICO PAOLINELLI. ANY CHANGE WILL BE WIPED OUT IF THE SCRIPT IS PROCESSED AGAIN. *******
-**********************************************************************************************************************************************************************/
 package com.zaptrapp.nishanth.databasetesting.Database;
 
 
